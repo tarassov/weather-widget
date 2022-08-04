@@ -8,7 +8,7 @@ const weatherApi = {
   },
   getByCityMocked: (city: TCity) => {
     return new Promise<TWeatherData>((resolve, reject) => {
-      resolve(londonWeather);
+      setTimeout(() => resolve(londonWeather), 1500);
     });
   },
 };

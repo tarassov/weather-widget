@@ -1,5 +1,6 @@
 import weatherApi from "@/services/api/weatherApi";
 import { ref, watch, type Ref } from "vue";
+import { useLoading } from "./useLoading";
 
 interface UseWeatherProps {
   city: Ref<TCity>;
@@ -8,19 +9,18 @@ interface UseWeatherProps {
 export function useWeather({ city }: UseWeatherProps) {
   const weatherData = ref<TWeatherData | null>(null);
 
-  async function fetchWeatherData(): Promise<void> {
+  async function fetchWeatherData() {
     weatherData.value = null;
     if (!city) return;
-    weatherApi.getByCityMocked(city.value).then((data) => {
-      console.log(data);
-      weatherData.value = data;
-      console.log(weatherData);
-    });
+    await weatherApi
+      .getByCityMocked(city.value)
+      .then((data) => (weatherData.value = data));
   }
-
-  watch(city, fetchWeatherData, { immediate: true });
+  const { loading, wrapper } = useLoading(fetchWeatherData);
+  watch(city, wrapper, { immediate: true });
 
   return {
+    loading,
     weatherData,
   };
 }
