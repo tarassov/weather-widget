@@ -1,0 +1,30 @@
+export const londonWeather: TWeatherData = {
+  coord: { lon: -0.1257, lat: 51.5085 },
+  weather: [
+    { id: 804, main: "Clouds", description: "overcast clouds", icon: "04d" },
+  ],
+  base: "stations",
+  main: {
+    temp: 297.57,
+    feels_like: 297.22,
+    temp_min: 295.92,
+    temp_max: 299.85,
+    pressure: 1015,
+    humidity: 44,
+  },
+  visibility: 10000,
+  wind: { speed: 4.63, deg: 300 },
+  clouds: { all: 100 },
+  dt: 1659623636,
+  sys: {
+    type: 2,
+    id: 268730,
+    country: "GB",
+    sunrise: 1659587311,
+    sunset: 1659642279,
+  },
+  timezone: 3600,
+  id: 2643743,
+  name: "London",
+  cod: 200,
+};

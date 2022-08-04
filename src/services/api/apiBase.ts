@@ -8,7 +8,9 @@ const instance = axios.create({
 });
 
 const checkSuccess = (response: AxiosResponse) => {
-  return response.data?.success ? response.data : Promise.reject(response.data);
+  return response.status === 200
+    ? response.data
+    : Promise.reject(response.data);
 };
 
 const handleErrors = (e: AxiosError) => {

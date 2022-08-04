@@ -12,4 +12,6 @@ const city = ref<TCity>(props.city);
 const { weatherData } = useWeather({ city });
 </script>
 
-<template>{{ weatherData?.city }}:{{ weatherData?.temperature }}</template>
+<template>
+  {{ weatherData?.weather[0].description }}:{{ weatherData?.main.temp }}
+</template>

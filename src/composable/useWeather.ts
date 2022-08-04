@@ -11,7 +11,11 @@ export function useWeather({ city }: UseWeatherProps) {
   async function fetchWeatherData(): Promise<void> {
     weatherData.value = null;
     if (!city) return;
-    weatherApi.getByCity(city.value).then((data) => (weatherData.value = data));
+    weatherApi.getByCityMocked(city.value).then((data) => {
+      console.log(data);
+      weatherData.value = data;
+      console.log(weatherData);
+    });
   }
 
   watch(city, fetchWeatherData, { immediate: true });
