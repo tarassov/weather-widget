@@ -1,5 +1,4 @@
 import { getCitiesByName, getWeatherByCityMock } from "@/services/api";
-import { ref, watch, type Ref } from "vue";
 
 interface UseGeoProps {
   cityName: string;
