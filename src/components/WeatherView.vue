@@ -14,10 +14,10 @@ const { weatherData } = useWeather({ city });
 
 <template>
   <div>
-    <q-btn label="Do something" />
-    <q-icon name="alarm" />
+    <VButton label="Danger" class="p-button-rounded p-button-danger">
+      this is button
+    </VButton>
     <text-h6>{{ weatherData?.weather[0].description }}</text-h6>
   </div>
-  <div><div v-ripple>Click Me</div></div>
-  > {{ weatherData?.weather[0].description }}:{{ weatherData?.main.temp }}
+  {{ weatherData?.weather[0].description }}:{{ weatherData?.main.temp }}
 </template>
