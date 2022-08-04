@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import WeatherView from "./WeatherView.vue";
-import IconSettings from "./icons/IconSettings.vue";
 
 const cities = ref<Array<TCity>>([{ name: "London" }]);
 //const cities = ref<Array<TCity>>([]);

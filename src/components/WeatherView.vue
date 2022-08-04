@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useWeather } from "@/composable/useWeather.js";
 import { ref } from "vue";
-interface Props {
+type TWeatherViewProps = {
   city: TCity;
-}
-const props = defineProps<Props>();
+};
+const props = defineProps<TWeatherViewProps>();
 
 const city = ref<TCity>(props.city);
 
