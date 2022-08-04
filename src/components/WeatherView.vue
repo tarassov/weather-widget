@@ -22,31 +22,42 @@ const description = computed(() => {
   return result;
 });
 
-const { loading, weatherData } = useWeather({ city });
+const { loading, weatherData, error } = useWeather({ city });
 </script>
 
 <template>
-  <div v-if="loading">
-    <div class="weather-header">
-      <h4>{{ city.name }}</h4>
-    </div>
-    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-  </div>
-  <div v-else>
-    <div class="weather-header">
-      <h4>{{ weatherData?.name }}, {{ weatherData?.sys.country }}</h4>
-    </div>
-    <div class="weather-image">
-      <img :src="imgUrl" />
-      <h2>{{ weatherData?.main.temp }}&deg;C</h2>
-    </div>
-    <div class="weather-description">
-      {{ description }}
-    </div>
+  <div class="weather-container">
+    <div v-if="error" class="weather-error">Server error.</div>
+    <template v-else>
+      <div v-if="loading">
+        <div class="weather-header">
+          <h4>{{ city.name }}</h4>
+        </div>
+        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+      </div>
+      <div v-else>
+        <div class="weather-header">
+          <h4>{{ weatherData?.name }}, {{ weatherData?.sys.country }}</h4>
+        </div>
+        <div class="weather-image">
+          <img :src="imgUrl" />
+          <h2>{{ weatherData?.main.temp }}&deg;C</h2>
+        </div>
+        <div class="weather-description">
+          {{ description }}
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.weather-container {
+  height: 150px;
+  background-color: beige;
+  border-radius: 20px;
+  margin: 0px 0 10px;
+}
 .weather-header {
   padding-left: 10px;
   text-align: left;

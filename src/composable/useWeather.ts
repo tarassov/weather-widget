@@ -8,11 +8,19 @@ interface UseWeatherProps {
 
 export function useWeather({ city }: UseWeatherProps) {
   const weatherData = ref<TWeatherData | null>(null);
+  const error = ref<boolean>(false);
 
   async function fetchWeatherData() {
     weatherData.value = null;
+    error.value = false;
     if (!city) return;
-    await weatherApi.getByCity(city).then((data) => (weatherData.value = data));
+    await weatherApi
+      .getByCity(city)
+      .then((data) => (weatherData.value = data))
+      .catch((e) => {
+        console.log(e);
+        error.value = true;
+      });
   }
   const { loading, wrapper } = useLoading(fetchWeatherData);
   watch(city, wrapper, { immediate: true });
@@ -20,5 +28,6 @@ export function useWeather({ city }: UseWeatherProps) {
   return {
     loading,
     weatherData,
+    error,
   };
 }

@@ -35,7 +35,6 @@ const cities = ref<Array<TCity>>([
   justify-content: flex-end;
 }
 .v-main {
-  margin: 0px auto;
   padding-top: 10px;
   text-align: center;
   background-color: white;
