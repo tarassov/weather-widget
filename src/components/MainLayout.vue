@@ -2,7 +2,10 @@
 import { ref } from "vue";
 import WeatherView from "./WeatherView.vue";
 
-const cities = ref<Array<TCity>>([{ name: "London" }]);
+const cities = ref<Array<TCity>>([
+  { name: "London" },
+  { name: "Saint Petersburg" },
+]);
 //const cities = ref<Array<TCity>>([]);
 </script>
 
