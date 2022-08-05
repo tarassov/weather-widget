@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import WeatherView from "./WeatherView.vue";
 import SettingsLayout from "./SettingsLayout.vue";
+import DraggableExample from "./DraggableExample.vue";
+import SettingsLayout1 from "./SettingsLayout.vue";
 
 const settingsMode = ref(false);
 

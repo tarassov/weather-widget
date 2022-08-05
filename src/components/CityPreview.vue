@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import draggable from "vuedraggable";
 const props = defineProps<{ city: TCity }>();
 </script>
 
@@ -6,7 +7,7 @@ const props = defineProps<{ city: TCity }>();
   <div class="city-container">
     <div class="city-name">
       <VButton
-        class="p-button-rounded p-button-text p-button-plain"
+        class="handle p-button-rounded p-button-text p-button-plain"
         icon="pi pi-bars"
       />
       <p>{{ city.name }}</p>
