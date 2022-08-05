@@ -1,5 +1,5 @@
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
+
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
@@ -23,6 +23,9 @@
 
 /* semantic color variables for this project */
 :root {
+  --v-card-color: rgba(245, 245, 217, 0.66);
+  --v-scroll-color: rgba(192, 192, 176, 0.66);
+  --v-white: #ffffff;
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);

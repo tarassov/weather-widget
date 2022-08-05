@@ -40,7 +40,7 @@ const { loading, weatherData, error } = useWeather({ city });
           <h4>{{ weatherData?.name }}, {{ weatherData?.sys.country }}</h4>
         </div>
         <div class="weather-image">
-          <img :src="imgUrl" />
+          <img :src="imgUrl" :alt="description" />
           <h2>{{ weatherData?.main.temp }}&deg;C</h2>
         </div>
         <div class="weather-description">
@@ -54,7 +54,7 @@ const { loading, weatherData, error } = useWeather({ city });
 <style lang="scss" scoped>
 .weather-container {
   height: 150px;
-  background-color: beige;
+  background-color: var(--v-card-color);
   border-radius: 20px;
   margin: 0px 0 10px;
 }
