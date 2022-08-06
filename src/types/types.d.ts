@@ -48,4 +48,5 @@ type TCity = {
   country?: string;
   state?: string;
   local_names?: { [key: string]: string };
+  index?: number;
 };

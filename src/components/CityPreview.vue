@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import draggable from "vuedraggable";
 const props = defineProps<{ city: TCity }>();
 </script>
 
