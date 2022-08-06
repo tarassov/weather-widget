@@ -56,7 +56,8 @@ const { loading, weatherData, error } = useWeather({ city });
   height: 150px;
   background-color: var(--v-card-color);
   border-radius: 20px;
-  margin: 0px 0 10px;
+  margin: 0px 5px 10px;
+  box-shadow: 2px 2px 1px rgb(181, 181, 179);
 }
 .weather-header {
   padding-left: 10px;

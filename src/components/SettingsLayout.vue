@@ -33,25 +33,27 @@ const onSubmit = () => {
   <div class="settings-container">
     <h3>Settings</h3>
   </div>
-  <draggable
-    :list="cities"
-    item-key="index"
-    class="list-group"
-    ghost-class="ghost"
-    animation="200"
-    handle=".handle"
-    @start="drag = true"
-    @end="drag = false"
-  >
-    <template #item="{ element }">
-      <CityPreview :city="element" />
-    </template>
-  </draggable>
+  <div class="cities-list">
+    <draggable
+      :list="cities"
+      item-key="name"
+      class="list-group"
+      ghost-class="ghost"
+      animation="200"
+      handle=".handle"
+      @start="drag = true"
+      @end="drag = false"
+    >
+      <template #item="{ element, index }">
+        <CityPreview :city="element" :index="index" />
+      </template>
+    </draggable>
+  </div>
   <form @submit.prevent="onSubmit">
-    <span class="p-input-icon-left">
+    <div class="p-input-icon-left new-city">
       <i class="icon pi pi-search" />
       <InputText type="text" v-model="form.cityName" placeholder="New city" />
-    </span>
+    </div>
   </form>
 </template>
 
@@ -63,10 +65,34 @@ const onSubmit = () => {
   opacity: 0.5;
   background: #c8ebfb;
 }
-.not-draggable {
-  cursor: no-drop;
-}
 .icon {
   z-index: 3;
+}
+
+.new-city {
+  margin: 10px;
+  width: 275px;
+}
+.new-city input {
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+}
+.cities-list {
+  height: -webkit-calc(100vh - 100px);
+  height: -moz-calc(100vh - 100px);
+  height: calc(100vh - 100px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.cities-list::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: var(--background-color);
+}
+
+.cities-list::-webkit-scrollbar-thumb {
+  background: var(--v-scroll-color);
 }
 </style>

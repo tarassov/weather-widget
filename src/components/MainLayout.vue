@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, provide, watchEffect } from "vue";
 import WeatherView from "./WeatherView.vue";
 import SettingsLayout from "./SettingsLayout.vue";
-import SettingsLayout1 from "./SettingsLayout.vue";
-
+import { useSettings } from "@/composable/useSettings";
+import { CityKey } from "@/symbols";
 const settingsMode = ref(false);
 
-const cities = ref<Array<TCity>>([
-  { name: "London", index: 1 },
-  { name: "Saint Petersburg", index: 2 },
-  { name: "Maiami", index: 3 },
-  { name: "New Yourk", index: 4 },
-  { name: "Tbilisi", index: 5 },
-]);
-//const cities = ref<Array<TCity>>([]);
+const cities = ref<Array<TCity>>([]);
+const loaded = ref(false);
+
+const { getValue, setValue } = useSettings();
 
 const toggleMenu = () => {
   settingsMode.value = !settingsMode.value;
@@ -24,28 +20,27 @@ const menuIcon = computed(() => {
 });
 
 onMounted(() => {
-  const storageData = localStorage.getItem("cities");
-  if (storageData) {
-    try {
-      cities.value = JSON.parse(storageData);
-    } catch (e) {
-      localStorage.removeItem("cities");
-    }
+  console.log("onMounted");
+  const savedCities = getValue<Array<TCity>>("cities");
+  if (savedCities) {
+    cities.value = savedCities;
   }
+  loaded.value = true;
 });
 
-const saveCities = () => {
-  // console.log(cities.value);
-  const parsed = JSON.stringify(cities.value);
-  localStorage.setItem("cities", parsed);
-};
-
 const add = (city: TCity) => {
-  cities.value.push(city);
-  console.log(cities.value);
+  cities.value?.push(city);
 };
 
-watch(cities, saveCities, { immediate: true });
+const removeCity = (index: number) => {
+  cities.value?.splice(index, 1);
+};
+
+watchEffect(() => {
+  if (loaded.value) setValue("cities", cities.value);
+});
+
+provide(CityKey, { onRemove: removeCity });
 </script>
 
 <template>
@@ -58,12 +53,14 @@ watch(cities, saveCities, { immediate: true });
     />
   </div>
   <div class="v-main v-list" v-if="!settingsMode">
-    <div v-if="cities.length === 0" class="v-error">No cities are selected</div>
+    <div v-if="!cities || cities.length === 0" class="v-error">
+      No cities are selected
+    </div>
     <template v-else>
       <WeatherView v-for="city in cities" :key="city.name" :city="city" />
     </template>
   </div>
-  <div class="v-main v-list" v-else>
+  <div class="v-main" v-else>
     <SettingsLayout :cities="cities" @add="add" />
   </div>
 </template>
@@ -78,15 +75,15 @@ watch(cities, saveCities, { immediate: true });
   text-align: center;
   background-color: white;
   color: var(--text-color);
-  max-height: 500px;
+  // max-height: 500px;
 }
 .v-error {
   padding-top: 50px;
 }
 .v-list {
-  height: -webkit-calc(100vh - 180px);
-  height: -moz-calc(100vh - 180px);
-  height: calc(100vh - 180px);
+  height: -webkit-calc(100vh - 30px);
+  height: -moz-calc(100vh - 30px);
+  height: calc(100vh - 30px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
