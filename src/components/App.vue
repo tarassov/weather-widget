@@ -2,4 +2,6 @@
 import MainLayout from "./MainLayout.vue";
 </script>
 
-<template><MainLayout></MainLayout></template>
+<template>
+  <div><MainLayout></MainLayout></div>
+</template>

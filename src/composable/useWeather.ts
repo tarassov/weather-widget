@@ -1,26 +1,38 @@
 import weatherApi from "@/services/api/weatherApi";
 import { ref, watch, type Ref } from "vue";
+import { useLoading } from "./useLoading";
 
 interface UseWeatherProps {
-  city: Ref<TCity>;
+  city: TCity;
 }
 
 export function useWeather({ city }: UseWeatherProps) {
   const weatherData = ref<TWeatherData | null>(null);
+  const error = ref<boolean>(false);
 
-  async function fetchWeatherData(): Promise<void> {
+  async function fetchWeatherData() {
     weatherData.value = null;
-    if (!city) return;
-    weatherApi.getByCityMocked(city.value).then((data) => {
-      console.log(data);
-      weatherData.value = data;
-      console.log(weatherData);
-    });
+    error.value = false;
+    if (!city) {
+      error.value = true;
+      return;
+    }
+    await weatherApi
+      .getByCityMocked(city)
+      .then((data) => {
+        weatherData.value = { ...data, name: city.name };
+      })
+      .catch((e) => {
+        console.log(e);
+        error.value = true;
+      });
   }
-
-  watch(city, fetchWeatherData, { immediate: true });
+  const { loading, wrapper } = useLoading(fetchWeatherData);
+  watch(city, wrapper, { immediate: true });
 
   return {
+    loading,
     weatherData,
+    error,
   };
 }

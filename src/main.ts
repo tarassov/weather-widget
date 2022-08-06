@@ -1,13 +1,20 @@
 import { createApp } from "vue";
 import App from "./components/App.vue";
-import { Quasar } from "quasar";
+
+import PrimeVue from "primevue/config";
+import Button from "primevue/button";
+import Tooltip from "primevue/tooltip";
 
 import "./assets/main.css";
 
-const weatherApp = createApp(App);
+import "primevue/resources/themes/md-light-indigo/theme.css";
+import "primevue/resources/primevue.min.css";
+import "primeicons/primeicons.css";
 
-weatherApp.use(Quasar, {
-  plugins: {}, // import Quasar plugins and add here
-});
+const app = createApp(App);
+app.use(PrimeVue);
 
-weatherApp.mount("#app");
+app.component("VButton", Button);
+app.directive("tooltip", Tooltip);
+
+app.mount("#app");
