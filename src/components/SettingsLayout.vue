@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import CityPreview from "./CityPreview.vue";
+import { useGeo } from "@/composable/useGeo";
 import draggable from "vuedraggable";
 import InputText from "primevue/inputtext";
 
 const props = defineProps<{ cities: Array<TCity> }>();
-
+const { loading, getCityAsync } = useGeo();
 const emit = defineEmits({
   add: (city: TCity) => {
     if (city.name) {
@@ -24,8 +25,10 @@ const form: { cityName: string } = reactive({
 const drag = ref(false);
 
 const onSubmit = () => {
-  emit("add", { name: form.cityName });
-  form.cityName = "";
+  getCityAsync({ cityName: form.cityName }).then((cityList) => {
+    emit("add", cityList[0]);
+    form.cityName = "";
+  });
 };
 </script>
 
@@ -51,7 +54,8 @@ const onSubmit = () => {
   </div>
   <form @submit.prevent="onSubmit">
     <div class="p-input-icon-left new-city">
-      <i class="icon pi pi-search" />
+      <i class="icon pi pi-spin pi-spinner" v-if="loading" />
+      <i class="icon pi pi-search" v-else />
       <InputText type="text" v-model="form.cityName" placeholder="New city" />
     </div>
   </form>
@@ -79,9 +83,9 @@ const onSubmit = () => {
   width: 100%;
 }
 .cities-list {
-  height: -webkit-calc(100vh - 100px);
-  height: -moz-calc(100vh - 100px);
-  height: calc(100vh - 100px);
+  max-height: -webkit-calc(100vh - 100px);
+  max-height: -moz-calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
   overflow-y: scroll;
   overflow-x: hidden;
 }

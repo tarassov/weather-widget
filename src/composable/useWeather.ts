@@ -18,7 +18,7 @@ export function useWeather({ city }: UseWeatherProps) {
       return;
     }
     await weatherApi
-      .getByCityMocked(city)
+      .getByCity(city)
       .then((data) => {
         weatherData.value = { ...data, name: city.name };
       })
