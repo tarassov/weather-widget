@@ -20,7 +20,6 @@ const menuIcon = computed(() => {
 });
 
 onMounted(() => {
-  console.log("onMounted");
   const savedCities = getValue<Array<TCity>>("cities");
   if (savedCities) {
     cities.value = savedCities;
@@ -81,9 +80,9 @@ provide(CityKey, { onRemove: removeCity });
   padding-top: 50px;
 }
 .v-list {
-  height: -webkit-calc(100vh - 30px);
-  height: -moz-calc(100vh - 30px);
-  height: calc(100vh - 30px);
+  max-height: -webkit-calc(100vh - 30px);
+  max-height: -moz-calc(100vh - 30px);
+  max-height: calc(100vh - 30px);
   overflow-y: scroll;
   overflow-x: hidden;
 }

@@ -1,29 +1,25 @@
 import weatherApi from "@/services/api/weatherApi";
-import { ref, watch, type Ref } from "vue";
+import { ref, watch, type ComputedRef } from "vue";
 import { useLoading } from "./useLoading";
 
-interface UseWeatherProps {
-  city: TCity;
-}
-
-export function useWeather({ city }: UseWeatherProps) {
+export function useWeather(city: ComputedRef<TCity>) {
   const weatherData = ref<TWeatherData | null>(null);
   const error = ref<boolean>(false);
 
-  async function fetchWeatherData() {
+  async function fetchWeatherData(cityToFetch: TCity) {
     weatherData.value = null;
     error.value = false;
-    if (!city) {
+    if (!cityToFetch) {
       error.value = true;
       return;
     }
     await weatherApi
-      .getByCity(city)
+      .getByCity(cityToFetch)
       .then((data) => {
-        weatherData.value = { ...data, name: city.name };
+        weatherData.value = { ...data, name: cityToFetch.name };
       })
       .catch((e) => {
-        console.log(e);
+        console.warn(e);
         error.value = true;
       });
   }

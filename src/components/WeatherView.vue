@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useWeather } from "@/composable/useWeather.js";
 import weatherApi from "@/services/api/weatherApi.js";
-import { computed, reactive } from "vue";
+import { computed } from "vue";
 type TWeatherViewProps = {
   city: TCity;
 };
 const props = defineProps<TWeatherViewProps>();
 
-const city = reactive<TCity>(props.city);
+const city = computed(() => props.city);
 
 const imgUrl = computed(() => {
   const imgCode = weatherData.value?.weather[0].icon;
@@ -22,7 +22,7 @@ const description = computed(() => {
   return result;
 });
 
-const { loading, weatherData, error } = useWeather({ city });
+const { loading, weatherData, error } = useWeather(city);
 </script>
 
 <template>
