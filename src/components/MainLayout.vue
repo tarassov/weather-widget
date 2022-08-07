@@ -4,6 +4,7 @@ import WeatherView from "./WeatherView.vue";
 import SettingsLayout from "./SettingsLayout.vue";
 import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
+import NewCityForm from "./NewCityForm.vue";
 const settingsMode = ref(false);
 
 const cities = ref<Array<TCity>>([]);
@@ -39,7 +40,7 @@ watchEffect(() => {
   if (loaded.value) setValue("cities", cities.value);
 });
 
-provide(CityKey, { onRemove: removeCity });
+provide(CityKey, { onRemove: removeCity, onAdd: add });
 </script>
 
 <template>
@@ -54,13 +55,14 @@ provide(CityKey, { onRemove: removeCity });
   <div class="v-main v-list" v-if="!settingsMode">
     <div v-if="!cities || cities.length === 0" class="v-error">
       No cities are selected
+      <NewCityForm />
     </div>
     <template v-else>
       <WeatherView v-for="city in cities" :key="city.name" :city="city" />
     </template>
   </div>
   <div class="v-main" v-else>
-    <SettingsLayout :cities="cities" @add="add" />
+    <SettingsLayout :cities="cities" />
   </div>
 </template>
 

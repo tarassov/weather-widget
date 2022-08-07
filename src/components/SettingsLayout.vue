@@ -1,35 +1,14 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import CityPreview from "./CityPreview.vue";
-import { useGeo } from "@/composable/useGeo";
+
 import draggable from "vuedraggable";
-import InputText from "primevue/inputtext";
+
+import NewCityForm from "./NewCityForm.vue";
 
 const props = defineProps<{ cities: Array<TCity> }>();
-const { loading, getCityAsync } = useGeo();
-const emit = defineEmits({
-  add: (city: TCity) => {
-    if (city.name) {
-      return true;
-    } else {
-      console.warn("No city name passed!");
-      return false;
-    }
-  },
-});
-
-const form: { cityName: string } = reactive({
-  cityName: "",
-});
 
 const drag = ref(false);
-
-const onSubmit = () => {
-  getCityAsync({ cityName: form.cityName }).then((cityList) => {
-    emit("add", cityList[0]);
-    form.cityName = "";
-  });
-};
 </script>
 
 <template>
@@ -52,13 +31,7 @@ const onSubmit = () => {
       </template>
     </draggable>
   </div>
-  <form @submit.prevent="onSubmit">
-    <div class="p-input-icon-left new-city">
-      <i class="icon pi pi-spin pi-spinner" v-if="loading" />
-      <i class="icon pi pi-search" v-else />
-      <InputText type="text" v-model="form.cityName" placeholder="New city" />
-    </div>
-  </form>
+  <NewCityForm />
 </template>
 
 <style lang="scss" scoped>
@@ -69,19 +42,7 @@ const onSubmit = () => {
   opacity: 0.5;
   background: #c8ebfb;
 }
-.icon {
-  z-index: 3;
-}
 
-.new-city {
-  margin: 10px;
-  width: 275px;
-}
-.new-city input {
-  border-radius: 10px;
-  height: 40px;
-  width: 100%;
-}
 .cities-list {
   max-height: -webkit-calc(100vh - 100px);
   max-height: -moz-calc(100vh - 100px);
