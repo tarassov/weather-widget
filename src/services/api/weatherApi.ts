@@ -5,7 +5,13 @@ const IMAGE_URL = "https://openweathermap.org";
 
 const weatherApi = {
   getByCity: (city: TCity) => {
-    return get<TWeatherData>(`${PATH_URL}?q=${city.name}&units=metric`);
+    if (city.lat && city.lon) {
+      return get<TWeatherData>(
+        `${PATH_URL}?lat=${city.lat}&lon=${city.lon}&units=metric`
+      );
+    } else {
+      return get<TWeatherData>(`${PATH_URL}?q=${city.name}&units=metric`);
+    }
   },
   getByCityMocked: (city: TCity) => {
     return new Promise<TWeatherData>((resolve, reject) => {
