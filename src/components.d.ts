@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     CitySuggestion: typeof import('./components/CitySuggestion.vue')['default']
     'IconParkTwotone:speed': typeof import('~icons/icon-park-twotone/speed')['default']
     MainLayout: typeof import('./components/MainLayout.vue')['default']
+    'Mdi:close': typeof import('~icons/mdi/close')['default']
     'Mdi:cog': typeof import('~icons/mdi/cog')['default']
     'Mdi:magnify': typeof import('~icons/mdi/magnify')['default']
     'Mdi:trashCanOutline': typeof import('~icons/mdi/trash-can-outline')['default']

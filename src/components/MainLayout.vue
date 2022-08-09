@@ -6,8 +6,8 @@ import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
 import NewCityForm from "./NewCityForm.vue";
 import Button from "primevue/button";
-const settingsMode = ref(false);
 
+const settingsMode = ref(false);
 const cities = ref<Array<TCity>>([]);
 const loaded = ref(false);
 
@@ -16,10 +16,6 @@ const { getValue, setValue } = useSettings();
 const toggleMenu = () => {
   settingsMode.value = !settingsMode.value;
 };
-
-const menuIcon = computed(() => {
-  return `pi ${settingsMode.value ? "pi-times" : "pi-cog"}`;
-});
 
 onMounted(() => {
   const savedCities = getValue<Array<TCity>>("cities");
@@ -53,10 +49,9 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
   <div class="v-container">
     <div class="v-menu">
       <Button
-        :icon="menuIcon"
         class="p-button-rounded p-button-text p-button-plain"
         @click="toggleMenu"
-        ><mdi:cog
+        ><mdi:cog v-if="!settingsMode" /><mdi:close v-else
       /></Button>
     </div>
     <div class="v-main v-list" v-if="!settingsMode">
