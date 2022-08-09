@@ -1,20 +1,21 @@
-import { createApp } from "vue";
-import App from "./components/App.vue";
+import { defineCustomElement, createApp, ref } from "vue";
 
-import PrimeVue from "primevue/config";
-import Button from "primevue/button";
-import Tooltip from "primevue/tooltip";
+import WeatherWidget from "./components/WeatherWidget.vue";
+import MainLayout from "./components/MainLayout.vue";
+import WeatherView from "./components/WeatherView.vue";
+import NewCityForm from "./components/NewCityForm.vue";
+import SettingsLayout from "./components/SettingsLayout.vue";
+import CityPreview from "./components/CityPreview.vue";
+import tooltip from "primevue/tooltip";
+WeatherWidget.styles = [
+  ...WeatherWidget.styles,
+  ...MainLayout.styles,
+  ...WeatherView.styles,
+  ...NewCityForm.styles,
+  ...SettingsLayout.styles,
+  ...CityPreview.styles,
+];
 
-import "./assets/main.css";
+const CustomElement = defineCustomElement(WeatherWidget);
 
-import "primevue/resources/themes/md-light-indigo/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-
-const app = createApp(App);
-app.use(PrimeVue);
-
-app.component("VButton", Button);
-app.directive("tooltip", Tooltip);
-
-app.mount("#app");
+customElements.define("weather-widget", CustomElement);

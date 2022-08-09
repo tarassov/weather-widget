@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CityKey } from "@/symbols";
 import { inject } from "vue";
+import Button from "primevue/button";
 
 const props = defineProps<{ city: TCity; index: number }>();
 const emit = defineEmits<{
@@ -17,13 +18,13 @@ const removeClick = () => {
 <template>
   <div class="city-container">
     <div class="city-name">
-      <VButton
+      <Button
         class="handle p-button-rounded p-button-text p-button-plain"
         icon="pi pi-bars"
       />
       <p>{{ city.name }}</p>
     </div>
-    <VButton
+    <Button
       class="p-button-rounded p-button-text p-button-plain"
       icon="pi  pi-trash"
       @click="removeClick"
@@ -47,6 +48,6 @@ const removeClick = () => {
   justify-content: flex-start;
 }
 .city-name p {
-  padding-top: 10px;
+  padding-top: 15px;
 }
 </style>

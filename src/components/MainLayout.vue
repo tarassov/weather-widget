@@ -5,6 +5,7 @@ import SettingsLayout from "./SettingsLayout.vue";
 import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
 import NewCityForm from "./NewCityForm.vue";
+
 const settingsMode = ref(false);
 
 const cities = ref<Array<TCity>>([]);
@@ -44,43 +45,51 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 </script>
 
 <template>
-  <div class="v-menu">
-    <VButton
-      :icon="menuIcon"
-      class="p-button-rounded p-button-text p-button-plain"
-      v-tooltip.bottom="'Settings'"
-      @click="toggleMenu"
-    />
-  </div>
-  <div class="v-main v-list" v-if="!settingsMode">
-    <div v-if="!cities || cities.length === 0" class="v-error">
-      No cities are selected
-      <NewCityForm />
+  <div class="w-container">
+    <div class="v-menu">
+      <PiButton
+        :icon="menuIcon"
+        class="p-button-rounded p-button-text p-button-plain"
+        @click="toggleMenu"
+      />
     </div>
-    <template v-else>
-      <WeatherView v-for="city in cities" :key="city.name" :city="city" />
-    </template>
-  </div>
-  <div class="v-main" v-else>
-    <SettingsLayout :cities="cities" />
+    <div class="v-main v-list" v-if="!settingsMode">
+      <div v-if="!cities || cities.length === 0" class="v-error">
+        No cities are selected
+        <NewCityForm />
+      </div>
+      <template v-else>
+        <WeatherView v-for="city in cities" :key="city.name" :city="city" />
+      </template>
+    </div>
+    <div class="v-main" v-else>
+      <SettingsLayout :cities="cities" />
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
+.w-container {
+  width: 350px;
+  margin: 0 auto;
+}
+
 .v-menu {
   position: absolute;
   right: 0px;
   z-index: 3;
 }
+
 .v-main {
   text-align: center;
   background-color: white;
   color: var(--text-color);
-  // max-height: 500px;
 }
+
 .v-error {
   padding-top: 50px;
 }
+
 .v-list {
   max-height: -webkit-calc(100vh - 30px);
   max-height: -moz-calc(100vh - 30px);

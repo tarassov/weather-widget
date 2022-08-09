@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import CityPreview from "./CityPreview.vue";
-
 import draggable from "vuedraggable";
-
-import NewCityForm from "./NewCityForm.vue";
 
 const props = defineProps<{ cities: Array<TCity> }>();
 
