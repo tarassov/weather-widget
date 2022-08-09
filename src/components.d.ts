@@ -18,8 +18,6 @@ declare module '@vue/runtime-core' {
     'Mdi:magnify': typeof import('~icons/mdi/magnify')['default']
     'Mdi:trashCanOutline': typeof import('~icons/mdi/trash-can-outline')['default']
     NewCityForm: typeof import('./components/NewCityForm.vue')['default']
-    PiAutoComplete: typeof import('primevue/autocomplete')['default']
-    PiButton: typeof import('primevue/button')['default']
     'Prime:bars': typeof import('~icons/prime/bars')['default']
     SettingsLayout: typeof import('./components/SettingsLayout.vue')['default']
     Spinner: typeof import('./components/Spinner.vue')['default']

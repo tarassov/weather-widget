@@ -14,7 +14,7 @@ export default defineConfig({
     lib: {
       entry: "src/main.ts",
       formats: ["es"],
-      fileName: "index",
+      fileName: "weather-widget-vue",
     },
     rollupOptions: {
       // Externalize deps that shouldn't be bundled into the library.
@@ -24,13 +24,13 @@ export default defineConfig({
     // Reduce bloat from legacy polyfills.
     target: "esnext",
     // Leave minification up to applications.
-    minify: false,
+    minify: true,
   },
   plugins: [
     components({
       dts: "src/components.d.ts",
       resolvers: [
-        IconsResolver({ componentPrefix: '' }),
+        IconsResolver({ componentPrefix: "" }),
         PrimeVueResolver({
           importStyle: true,
           importIcons: true,

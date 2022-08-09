@@ -5,6 +5,7 @@ import SettingsLayout from "./SettingsLayout.vue";
 import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
 import NewCityForm from "./NewCityForm.vue";
+import Button from "primevue/button";
 const settingsMode = ref(false);
 
 const cities = ref<Array<TCity>>([]);
@@ -51,12 +52,12 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 <template>
   <div class="v-container">
     <div class="v-menu">
-      <PiButton
+      <Button
         :icon="menuIcon"
         class="p-button-rounded p-button-text p-button-plain"
         @click="toggleMenu"
         ><mdi:cog
-      /></PiButton>
+      /></Button>
     </div>
     <div class="v-main v-list" v-if="!settingsMode">
       <div v-if="!cities || cities.length === 0" class="v-error">
@@ -100,7 +101,7 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 }
 
 .v-list {
-  max-height: calc(100%-100px);
+  max-height: calc(100% - 100px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
