@@ -46,7 +46,7 @@ const { loading, weatherData, error } = useWeather(city);
         <div class="weather-header">
           <h4>{{ city.name }}</h4>
         </div>
-        <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        <div class="spinner"><Spinner /></div>
       </div>
       <div v-else>
         <div class="weather-header">
@@ -61,24 +61,24 @@ const { loading, weatherData, error } = useWeather(city);
         </div>
         <div class="weather-details">
           <div class="weather-details-item">
-            <i class="pi pi-arrow-up" :style="windStyle" />
-            {{ windDescription }}
+            <i :style="windStyle"><bi:arrow-up /></i>
+            <p>{{ windDescription }}</p>
           </div>
 
           <div class="weather-details-item">
-            <i class="pi pi-clock" :style="windStyle" />
-            {{ weatherData?.main.pressure }}hPa
+            <i :style="windStyle"><icon-park-twotone:speed /></i>
+            <p>{{ weatherData?.main.pressure }}hPa</p>
           </div>
         </div>
         <div class="weather-details" v-show="weatherData">
           <div class="weather-details-item">
-            <i class="pi pi-compass" :style="windStyle" />
-            Humidity: {{ weatherData?.main.humidity }}%
+            <i><cil:drop /></i>
+            <p>{{ weatherData?.main.humidity }}%</p>
           </div>
 
           <div class="weather-details-item">
-            <i class="pi pi-eye" />
-            Visibility: {{ (weatherData?.visibility || 0) / 1000 }}km
+            <i><charm:eye /></i>
+            <p>{{ (weatherData?.visibility || 0) / 1000 }}km</p>
           </div>
         </div>
       </div>
@@ -119,6 +119,7 @@ const { loading, weatherData, error } = useWeather(city);
 }
 .weather-details {
   margin-top: 10px;
+  margin-left: 10px;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -137,5 +138,16 @@ const { loading, weatherData, error } = useWeather(city);
 }
 .weather-details-item i {
   margin-right: 5px;
+}
+.weather-details-item p {
+  padding-top: 2px;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 </style>

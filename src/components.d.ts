@@ -7,12 +7,22 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    App: typeof import('./components/App.vue')['default']
+    'Bi:arrowUp': typeof import('~icons/bi/arrow-up')['default']
+    'Charm:eye': typeof import('~icons/charm/eye')['default']
+    'Cil:drop': typeof import('~icons/cil/drop')['default']
     CityPreview: typeof import('./components/CityPreview.vue')['default']
+    CitySuggestion: typeof import('./components/CitySuggestion.vue')['default']
+    'IconParkTwotone:speed': typeof import('~icons/icon-park-twotone/speed')['default']
     MainLayout: typeof import('./components/MainLayout.vue')['default']
+    'Mdi:cog': typeof import('~icons/mdi/cog')['default']
+    'Mdi:magnify': typeof import('~icons/mdi/magnify')['default']
+    'Mdi:trashCanOutline': typeof import('~icons/mdi/trash-can-outline')['default']
     NewCityForm: typeof import('./components/NewCityForm.vue')['default']
+    PiAutoComplete: typeof import('primevue/autocomplete')['default']
     PiButton: typeof import('primevue/button')['default']
+    'Prime:bars': typeof import('~icons/prime/bars')['default']
     SettingsLayout: typeof import('./components/SettingsLayout.vue')['default']
+    Spinner: typeof import('./components/Spinner.vue')['default']
     WeatherView: typeof import('./components/WeatherView.vue')['default']
     WeatherWidget: typeof import('./components/WeatherWidget.vue')['default']
   }

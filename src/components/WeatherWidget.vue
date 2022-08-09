@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useSettings } from "@/composable/useSettings";
+import { onMounted } from "vue";
 const props = defineProps<{ api_key: string }>();
 const { setValue } = useSettings();
 setValue("api_key", props.api_key);
 </script>
 
 <template>
-  <div><MainLayout></MainLayout></div>
+  <MainLayout></MainLayout>
 </template>
 
 <style src="../assets/base.css"></style>

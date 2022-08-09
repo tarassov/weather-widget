@@ -5,7 +5,6 @@ import SettingsLayout from "./SettingsLayout.vue";
 import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
 import NewCityForm from "./NewCityForm.vue";
-
 const settingsMode = ref(false);
 
 const cities = ref<Array<TCity>>([]);
@@ -30,7 +29,12 @@ onMounted(() => {
 });
 
 const add = (city: TCity) => {
-  cities.value?.push(city);
+  if (city) {
+    const exists = cities.value.find(
+      (c) => c.lat === city.lat && c.lon === city.lon
+    );
+    if (!exists) cities.value?.push(city);
+  }
 };
 
 const removeCity = (index: number) => {
@@ -45,13 +49,14 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 </script>
 
 <template>
-  <div class="w-container">
+  <div class="v-container">
     <div class="v-menu">
       <PiButton
         :icon="menuIcon"
         class="p-button-rounded p-button-text p-button-plain"
         @click="toggleMenu"
-      />
+        ><mdi:cog
+      /></PiButton>
     </div>
     <div class="v-main v-list" v-if="!settingsMode">
       <div v-if="!cities || cities.length === 0" class="v-error">
@@ -69,9 +74,11 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 </template>
 
 <style scoped>
-.w-container {
+@import "primeicons/primeicons.css";
+.v-container {
   width: 350px;
   margin: 0 auto;
+  height: 100%;
 }
 
 .v-menu {
@@ -81,6 +88,8 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 }
 
 .v-main {
+  max-height: inherit;
+  height: 100%;
   text-align: center;
   background-color: white;
   color: var(--text-color);
@@ -91,9 +100,7 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 }
 
 .v-list {
-  max-height: -webkit-calc(100vh - 30px);
-  max-height: -moz-calc(100vh - 30px);
-  max-height: calc(100vh - 30px);
+  max-height: calc(100%-100px);
   overflow-y: scroll;
   overflow-x: hidden;
 }

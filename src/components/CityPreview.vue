@@ -21,14 +21,17 @@ const removeClick = () => {
       <Button
         class="handle p-button-rounded p-button-text p-button-plain"
         icon="pi pi-bars"
-      />
-      <p>{{ city.name }}</p>
+      >
+        <prime:bars />
+      </Button>
+      <p>{{ city.name }}, {{ city.country }}</p>
     </div>
     <Button
       class="p-button-rounded p-button-text p-button-plain"
-      icon="pi  pi-trash"
       @click="removeClick"
-    />
+    >
+      <mdi:trash-can-outline />
+    </Button>
   </div>
 </template>
 
