@@ -6,6 +6,9 @@ import dts from "vite-plugin-dts";
 import components from "unplugin-vue-components/vite";
 import { resolve } from "node:path";
 import { PrimeVueResolver } from "unplugin-vue-components/resolvers";
+import IconsResolver from "unplugin-icons/resolver";
+import icons from "unplugin-icons/vite";
+
 export default defineConfig({
   build: {
     lib: {
@@ -27,6 +30,7 @@ export default defineConfig({
     components({
       dts: "src/components.d.ts",
       resolvers: [
+        IconsResolver({ componentPrefix: '' }),
         PrimeVueResolver({
           importStyle: true,
           importIcons: true,
@@ -36,6 +40,9 @@ export default defineConfig({
       ],
       directives: true,
       deep: true,
+    }),
+    icons({
+      autoInstall: true,
     }),
     dts(),
     vue({

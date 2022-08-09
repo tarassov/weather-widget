@@ -11,27 +11,26 @@ const drag = ref(false);
   <div class="settings-container">
     <h3>Settings</h3>
   </div>
-  <div class="cities-list">
-    <draggable
-      :list="cities"
-      item-key="name"
-      class="list-group"
-      ghost-class="ghost"
-      animation="200"
-      handle=".handle"
-      @start="drag = true"
-      @end="drag = false"
-    >
-      <template #item="{ element, index }">
-        <CityPreview :city="element" :index="index" />
-      </template>
-    </draggable>
-  </div>
+  <draggable
+    :list="cities"
+    item-key="name"
+    class="cities-list"
+    ghost-class="ghost"
+    animation="200"
+    handle=".handle"
+    @start="drag = true"
+    @end="drag = false"
+  >
+    <template #item="{ element, index }">
+      <CityPreview :city="element" :index="index" />
+    </template>
+  </draggable>
   <NewCityForm />
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .settings-container {
+  max-height: inherit;
   padding-top: 15px;
 }
 .ghost {
@@ -40,9 +39,10 @@ const drag = ref(false);
 }
 
 .cities-list {
-  max-height: -webkit-calc(100vh - 100px);
-  max-height: -moz-calc(100vh - 100px);
-  max-height: calc(100vh - 100px);
+  max-height: -webkit-calc(100% - 100px);
+  max-height: -moz-calc(100% - 100px);
+  max-height: calc(100% - 100px);
+
   overflow-y: scroll;
   overflow-x: hidden;
 }

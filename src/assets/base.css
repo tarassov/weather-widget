@@ -1,7 +1,10 @@
 :host {
-  --v-card-color: rgba(245, 245, 217, 0.66);
+  --v-card-color: rgba(162, 202, 224, 0.66);
   --v-scroll-color: rgba(229, 229, 210, 0.66);
   --v-white: #ffffff;
+  height: 100%;
+  max-height: inherit;
+  overflow: hidden;
 }
 
 *,
