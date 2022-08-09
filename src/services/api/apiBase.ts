@@ -1,6 +1,9 @@
 import axios, { AxiosError, type AxiosResponse } from "axios";
+import { useSettings } from "@/composable/useSettings";
+
 const BASE_URL = "https://api.openweathermap.org/";
-const API_KEY = "24c0783ea632e644f853e0a65989b09a";
+const { getValue } = useSettings();
+
 axios.defaults.baseURL = BASE_URL;
 
 const instance = axios.create({
@@ -23,7 +26,7 @@ const handleErrors = (e: AxiosError) => {
 
 export const get = <ResponseType>(endpoint: string): Promise<ResponseType> => {
   return instance
-    .get<ResponseType>(`${endpoint}&appid=${API_KEY}`, {
+    .get<ResponseType>(`${endpoint}&appid=${getValue("api_key")}`, {
       headers: {
         "Content-Type": "application/json",
       },

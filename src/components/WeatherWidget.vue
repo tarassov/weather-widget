@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useSettings } from "@/composable/useSettings";
 const props = defineProps<{ api_key: string }>();
+const { setValue } = useSettings();
+setValue("api_key", props.api_key);
 </script>
 
 <template>
