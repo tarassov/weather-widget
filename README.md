@@ -1,7 +1,9 @@
 # What is this all about
 
-Simple weather widget that display weather in the specified cities that fetches data from [OpenWeather API](https://openweathermap.org/api)
-<img src="https://github.com/tarassov/weather-widget/raw/master/weather-widget.gif" width="300">
+Simple weather widget that displays weather in the specified cities. The data is fetched from the [OpenWeather API](https://openweathermap.org/api)
+&nbsp;
+
+<img src="https://github.com/tarassov/weather-widget/raw/master/example/weather-widget.gif" width="300">
 
 ## DEMO: You can find the demo [HERE](https://tarassov.github.io/weather-widget/)
 
