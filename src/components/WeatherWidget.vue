@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{ api_key: string }>();
+</script>
 
 <template>
   <div><MainLayout></MainLayout></div>

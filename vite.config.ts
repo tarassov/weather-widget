@@ -6,7 +6,6 @@ import dts from "vite-plugin-dts";
 import components from "unplugin-vue-components/vite";
 import { resolve } from "node:path";
 import { PrimeVueResolver } from "unplugin-vue-components/resolvers";
-import { directive } from "@babel/types";
 export default defineConfig({
   build: {
     lib: {

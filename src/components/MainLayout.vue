@@ -5,7 +5,6 @@ import SettingsLayout from "./SettingsLayout.vue";
 import { useSettings } from "@/composable/useSettings";
 import { CityKey } from "@/symbols";
 import NewCityForm from "./NewCityForm.vue";
-import vTooltip from "primevue/tooltip";
 
 const settingsMode = ref(false);
 
@@ -51,7 +50,6 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
       <PiButton
         :icon="menuIcon"
         class="p-button-rounded p-button-text p-button-plain"
-        v-tooltip="'Settings'"
         @click="toggleMenu"
       />
     </div>
@@ -73,6 +71,7 @@ provide(CityKey, { onRemove: removeCity, onAdd: add });
 <style scoped>
 .w-container {
   width: 350px;
+  margin: 0 auto;
 }
 
 .v-menu {

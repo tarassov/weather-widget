@@ -8,7 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CityPreview: typeof import('./components/CityPreview.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     MainLayout: typeof import('./components/MainLayout.vue')['default']
     NewCityForm: typeof import('./components/NewCityForm.vue')['default']
     PiButton: typeof import('primevue/button')['default']
