@@ -1,6 +1,6 @@
 {
   "name": "weather-widget",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -11,7 +11,9 @@
     "build-only": "vite build",
     "dev": "vite",
     "preview": "vite preview --port 4173",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "files": [
     "dist",
@@ -50,6 +52,7 @@
     "vite": "^3.0.1",
     "vite-plugin-dts": "^1.4.1",
     "vue-cli-plugin-axios": "~0.0.4",
-    "vue-tsc": "^0.38.8"
+    "vue-tsc": "^0.38.8",
+    "gh-pages": "^4.0.0"
   }
 }

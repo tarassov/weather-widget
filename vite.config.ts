@@ -10,6 +10,9 @@ import IconsResolver from "unplugin-icons/resolver";
 import icons from "unplugin-icons/vite";
 
 export default defineConfig({
+  define: {
+    "process.env": {},
+  },
   build: {
     lib: {
       entry: "src/main.ts",
