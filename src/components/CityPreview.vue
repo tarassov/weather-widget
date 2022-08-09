@@ -24,7 +24,7 @@ const removeClick = () => {
       >
         <prime:bars />
       </Button>
-      <p>{{ city.name }}</p>
+      <p>{{ city.name }}, {{ city.country }}</p>
     </div>
     <Button
       class="p-button-rounded p-button-text p-button-plain"

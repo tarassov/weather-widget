@@ -39,9 +39,9 @@ const drag = ref(false);
 }
 
 .cities-list {
-  max-height: -webkit-calc(100% - 100px);
-  max-height: -moz-calc(100% - 100px);
-  max-height: calc(100% - 100px);
+  max-height: -webkit-calc(100% - 150px);
+  max-height: -moz-calc(100% - 150px);
+  max-height: calc(100% - 150px);
 
   overflow-y: scroll;
   overflow-x: hidden;

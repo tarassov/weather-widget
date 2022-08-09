@@ -7,6 +7,7 @@ import NewCityForm from "./components/NewCityForm.vue";
 import SettingsLayout from "./components/SettingsLayout.vue";
 import CityPreview from "./components/CityPreview.vue";
 import Spinner from "./components/Spinner.vue";
+import CitySuggestion from "./components/CitySuggestion.vue";
 
 WeatherWidget.styles = [
   ...WeatherWidget.styles,
@@ -16,6 +17,7 @@ WeatherWidget.styles = [
   ...SettingsLayout.styles,
   ...CityPreview.styles,
   ...Spinner.styles,
+  ...CitySuggestion.styles,
 ];
 
 const CustomElement = defineCustomElement(WeatherWidget);

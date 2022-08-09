@@ -29,7 +29,12 @@ onMounted(() => {
 });
 
 const add = (city: TCity) => {
-  if (city) cities.value?.push(city);
+  if (city) {
+    const exists = cities.value.find(
+      (c) => c.lat === city.lat && c.lon === city.lon
+    );
+    if (!exists) cities.value?.push(city);
+  }
 };
 
 const removeCity = (index: number) => {
