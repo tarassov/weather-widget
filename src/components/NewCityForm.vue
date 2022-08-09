@@ -23,15 +23,15 @@ const onSubmit = () => {
 <template>
   <form @submit.prevent="onSubmit">
     <div class="p-input-icon-left new-city">
-      <i class="icon pi pi-spin pi-spinner" v-if="loading" />
-      <i class="icon pi pi-search" v-else />
+      <i class="new-city-icon pi spinner" v-if="loading"><Spinner /></i>
+      <i class="new-city-icon" v-else><mdi:magnify /> </i>
       <InputText type="text" v-model="form.cityName" placeholder="New city" />
     </div>
   </form>
 </template>
 
 <style lang="scss" scoped>
-.icon {
+.new-city-icon {
   z-index: 3;
 }
 
@@ -43,5 +43,8 @@ const onSubmit = () => {
   border-radius: 10px;
   height: 40px;
   width: 100%;
+}
+.spinner {
+  display: inline;
 }
 </style>
