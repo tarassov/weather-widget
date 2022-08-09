@@ -13,7 +13,7 @@ export const londonWeather: TWeatherData = {
     humidity: 44,
   },
   visibility: 10000,
-  wind: { speed: 4.63, deg: 300 },
+  wind: { speed: 12, deg: 300 },
   clouds: { all: 100 },
   dt: 1659623636,
   sys: {

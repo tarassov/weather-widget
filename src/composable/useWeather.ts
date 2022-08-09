@@ -1,33 +1,42 @@
 import weatherApi from "@/services/api/weatherApi";
-import { ref, watch, type Ref } from "vue";
+import { createDOMCompilerError } from "@vue/compiler-dom";
+import { ref, onMounted, onUnmounted, watch, type ComputedRef } from "vue";
 import { useLoading } from "./useLoading";
 
-interface UseWeatherProps {
-  city: TCity;
-}
-
-export function useWeather({ city }: UseWeatherProps) {
+export function useWeather(city: ComputedRef<TCity>) {
   const weatherData = ref<TWeatherData | null>(null);
+  const currentCity = ref<TCity>(city.value);
   const error = ref<boolean>(false);
+  const interval = ref<number>();
 
-  async function fetchWeatherData() {
-    weatherData.value = null;
+  async function fetchWeatherData(cityToFetch: TCity) {
+    currentCity.value = cityToFetch;
+
     error.value = false;
-    if (!city) {
+    if (!cityToFetch) {
       error.value = true;
       return;
     }
     await weatherApi
-      .getByCityMocked(city)
+      .getByCity(cityToFetch)
       .then((data) => {
-        weatherData.value = { ...data, name: city.name };
+        weatherData.value = { ...data, name: cityToFetch.name };
       })
       .catch((e) => {
-        console.log(e);
+        console.warn(e);
         error.value = true;
       });
   }
   const { loading, wrapper } = useLoading(fetchWeatherData);
+  onMounted(() => {
+    interval.value = setInterval(function () {
+      fetchWeatherData(currentCity.value);
+    }, 10000);
+  });
+
+  onUnmounted(() => {
+    clearInterval(interval.value);
+  });
   watch(city, wrapper, { immediate: true });
 
   return {

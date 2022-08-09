@@ -1,32 +1,10 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import CityPreview from "./CityPreview.vue";
+import { ref } from "vue";
 import draggable from "vuedraggable";
-import InputText from "primevue/inputtext";
 
 const props = defineProps<{ cities: Array<TCity> }>();
 
-const emit = defineEmits({
-  add: (city: TCity) => {
-    if (city.name) {
-      return true;
-    } else {
-      console.warn("No city name passed!");
-      return false;
-    }
-  },
-});
-
-const form: { cityName: string } = reactive({
-  cityName: "",
-});
-
 const drag = ref(false);
-
-const onSubmit = () => {
-  emit("add", { name: form.cityName });
-  form.cityName = "";
-};
 </script>
 
 <template>
@@ -49,12 +27,7 @@ const onSubmit = () => {
       </template>
     </draggable>
   </div>
-  <form @submit.prevent="onSubmit">
-    <div class="p-input-icon-left new-city">
-      <i class="icon pi pi-search" />
-      <InputText type="text" v-model="form.cityName" placeholder="New city" />
-    </div>
-  </form>
+  <NewCityForm />
 </template>
 
 <style lang="scss" scoped>
@@ -65,23 +38,11 @@ const onSubmit = () => {
   opacity: 0.5;
   background: #c8ebfb;
 }
-.icon {
-  z-index: 3;
-}
 
-.new-city {
-  margin: 10px;
-  width: 275px;
-}
-.new-city input {
-  border-radius: 10px;
-  height: 40px;
-  width: 100%;
-}
 .cities-list {
-  height: -webkit-calc(100vh - 100px);
-  height: -moz-calc(100vh - 100px);
-  height: calc(100vh - 100px);
+  max-height: -webkit-calc(100vh - 100px);
+  max-height: -moz-calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
   overflow-y: scroll;
   overflow-x: hidden;
 }

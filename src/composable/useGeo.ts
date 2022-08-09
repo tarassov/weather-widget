@@ -1,15 +1,24 @@
-import { getCitiesByName, getWeatherByCityMock } from "@/services/api";
+import geoApi from "@/services/api/geoApi";
+import { ref } from "vue";
+import { useLoading } from "./useLoading";
 
 interface UseGeoProps {
   cityName: string;
 }
 
-export function useGeo({ cityName }: UseGeoProps) {
-  async function fetchCityList(): Promise<Array<TCity>> {
-    return getCitiesByName(cityName).then((data) => data);
+export function useGeo() {
+  const loading = ref(false);
+  async function getCityAsync({
+    cityName,
+  }: UseGeoProps): Promise<Array<TCity>> {
+    loading.value = true;
+    const result = await geoApi.getCityList(cityName, 1);
+    loading.value = false;
+    return result;
   }
 
   return {
-    fetchCityList,
+    loading,
+    getCityAsync,
   };
 }
