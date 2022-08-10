@@ -20,7 +20,7 @@ Simple weather widget that displays weather in the specified cities. The data is
 
 ## Usage
 
-You can add tjis widget by inserting the following code
+You can add this widget by inserting the following code line into an HTML page
 
 ```sh
    <weather-widget api_key="YOUR_OPENWATHER_API_KEY" />
